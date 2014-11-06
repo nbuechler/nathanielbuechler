@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nathaniel Buechler</title>
+
+<!-- jQuery-->
+<script src="js/jquery-1.11.0.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<!-- http://bootswatch.com/ for different themes -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap.min.css"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap-theme.min.css"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- Google Font -->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+<!--JQUERY UI 1.10.4-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="css_v2/jquery-ui-1.10.4.custom.min.css">
+
+<!--SCROLLBAR: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<link href="css_v2/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+
+<!--D3JS Version 3-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<!--d3-tip: http://labratrevenge.com/d3-tip/-->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<style>
+
+/* Windows Phone IE Hack*/
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/*Bootstrap Starter */
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+</style>
+
+<style>
+
+.axis {
+  font: 10px 'Lato', sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}  
+  
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  border: white 2px solid;
+}
+
+/* Creates a small triangle extender for the tooltip */
+/*
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+*/
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+</style>
+
+<style>
+
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+</style>
+
+<style>
+
+#backgroundHolder{
+	width: 100%;
+	background:url(imagery/bkgd/bkgd_v2_index.gif);
+	background-repeat: no-repeat;
+	background-color: black;
+	}
+
+.container {
+	font-family: 'Lato', sans-serif;
+	}
+
+h1{
+	font-family: 'Lato', sans-serif;
+	}
+
+h2{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+p{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+.btnMargin{
+	margin-top: 20px;
+	}
+	
+#roleBar{
+	text-align: center;
+	}
+
+.panelPadding {
+	padding-bottom: 3%;
+	}
+
+.roleIcon{
+	width: 73px;
+	margin: 1%;
+	}
+	
+.roleDetailed{
+	}
+
+.roleIcon:hover, .roleIconDetailed:hover{
+	opacity: .3;
+	}
+	
+.canvasHolderBkgd{
+	background-color: #D3D3D3
+	}	
+	
+/* Scrollbar styled and fun */
+.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto; }
+.scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+.scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+.scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
+
+	
+</style>
+
+
+
+<body id="backgroundHolder">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.nathanielbuechler.com">Multifaceted Specialist</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <!--
+            <li><a href="data-engineering.html">Data Engineering</a></li>
+            <li><a href="system-thinking.html">Systems Thinking</a></li>
+            -->
+            <li><a href="rolePerspective.html">Roles</a></li>
+            <li><a href="skillPerspective.html">Skills</a></li>
+			<li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+<!--Artist-->
+        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="artist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/artist-hex.png" height="150" alt="Artist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>I remember when I played Mario Paint on the Super Nintendo as a small child. My dad had gotten me the game because of the graffiti I drew on my parent's walls. I guess they appreciated it enough to find a different outlet for my creative energy.
+</p>
+                        <p>Later I discovered in middle school art classes that my favorite classes were those that let me get my hands messy. My peers and I were given the opportunity to choose an extra elective and I chose to take another basic art course. I learned the fundamentals of making pottery, recycling newsprint into books, binding prints we made from etchings in the book, and of course how to store small paintings. I think that eighth grade fostered my love of art.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="artist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">18 Years (from 1996)</div>
+            </div>
+        </div>
+<!--Back-End Developer-->
+		        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="back-end-developer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/back-end-developer-hex.png" height="150" alt="Back-End Developer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>After learning web development and applying it to my work as a user interface developer, I began learning how to implement technologies such as Maven and Gradle – to a lesser extent. These were the build tools I first learned to deploy my Java and Groovy applications. But before I get to far ahead of myself, I want to discuss Python.
+</p>
+                        <p>While at UMBC (University of Maryland, Baltimore County), I found that programming could be very exciting, and I discovered Udacity where I first learned Python. I would be surprised to learn later the similarities between programming languages. I'm currently a Java developer in my profession, but I am learning Python to master my ability to build powerful scripts... but this chapter of my life is still being written!
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="back-end-developer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">1 Year (from 2013)</div>
+            </div>
+        </div>
+<!--Comparative Institutionalist-->
+		        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="comparative-institutionalist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/comparative-institutionalist-hex.png" height="150" alt="Comparative Institutionalist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>During my first year at UMBC, my interests had not lead me to Political Science. I decided to enroll in Political Science 260 – the study of comparative politics: an introduction. Interestingly, I found that my knowledge of culture and people could be very useful, and I found that humanity actually has many more similarities than differences. Said simply, our collective means and ways of doing and being have produced the basic state.
+</p>
+                        <p>I found out that I enjoyed learning about how some of us in society can shape these states into powerful machines that do not discriminate between good and bad. In fact, my intrigue was and still is focused on the subjective nature of human relations. Moreover, I graduated with a Political Science degree from UMBC with an informal focus on institutional study.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="comparative-institutionalist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+<!--Computer Programmer-->
+		        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="computer-programmer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/computer-programmer-hex.png" height="150" alt="Computer Programmer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>The first language I learned was HTML – then, CSS, and quickly afterwords JavaScript. To be perfectly honest, I never thought of myself as a programmer until many years after I started programming. But nevertheless, I have been using Object Oriented Programming principles since 2010 and those ideas have carried into my other thought processes in different fields.
+</p>
+                        <p>I find programming a liberating experiences, where an individual has an army of idiotic robots. If the programmer can be a great instructor, those robots become highly intelligent and merge into a single conscious being which becomes better at performing tasks. Essentially, the new being becomes smarter than the programmer.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="computer-programmer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+<!--Cultural Anthropologist-->
+		        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="cultural-anthropologist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/cultural-anthropologist-hex.png" height="150" alt="Cultural Anthropologist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>This story is my favorite because of the manner I developed this role. I found out that I enjoyed learning about culture in high school because at Oakland Mills High School, the population is quite diverse. In my first year at UMBC, I learned that the university compels its students take courses in a variety of disciplines. So, I discovered that cultural anthropology would fulfill one of my basic academic requirements.
+</p>
+                        <p>I learned about a tribe that mourns their dead by cannibalizing the flesh of the dead. Burial in this custom is similar to western culture's view on cannibalizing the dead. Interestingly, the perspectives are reversed in the two aforementioned customs. Cultural relativism, since that class has intrigued me and continues to shape my own perspective on different belief systems that individuals and societies share.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="cultural-anthropologist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+<!--Engineer-->
+		        <div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="engineer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/engineer-hex.png" height="150" alt="Engineer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>While I do not have a comprehensive background in any formal engineering, I view engineering as a very broad field and I intend to develop a stronger understanding of materials sciences. I'm really looking forward to building a robotic cat one day, and I think it will test my understanding of math, programming, and science.
+</p>
+                        <p>I will probably not build any actual bridges in my life, but I plan to build a structure from tires, dirt, and upcycle other materials. This building is called an Earthship, and I am going to learn about the principles needed in order to develop a self-sufficient and environmentally friendly home to live in.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="engineer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">2 Years (from 2012)</div>
+            </div>
+        </div>
+<!--Front-End Developer-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="front-end-developer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/front-end-developer-hex.png" height="150" alt="Front-End Developer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>User interfaces and user experiences are important to me because in the digital age, wisdom is only communicated through effective design of them. I do not foresee a time where I will not use the principles applied to someone wanting to make effective visual software. I learned about jQuery and jQuery UI, then later d3.js, dc.js, WebGL technologies, and Bootstrap.
+</p>
+                        <p>It will be exciting for me when computers display interactive systems that are completely three-dimensional and interact with the physical world. Then I think, I may have to update this website dramatically, and suit it to interact with your walls, appliances, and the people sitting around you.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="front-end-developer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">1 Year (from 2013)</div>
+            </div>
+        </div>
+<!--Graphic Designer-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="graphic-designer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/graphic-designer-hex.png" height="150" alt="Graphic Designer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>My first internship was at the Defense Information School, where those with a military occupation specialty in communications are trained to serve in the United States Army. Whereas peers and my mentors there were enlisted, I was still a student in my high school. I was able to develop a large graphic design project called Scorpion Success.
+</p>
+                        <p>This project defined my skill set as print designer, and I published Scorpion Success as a book the following year. The content encompassed interviews, photography, and graphics I created and compiled for my high school. The book served as a success guide for students. But, my favorite part of the entire experience was understanding and receiving the appreciation of parents and students that replied to me with outstanding reviews. They loved the assistance I provided, and that part of my history continues to motivate me in creating great products.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="graphic-designer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">5 Years (from 2009)</div>
+            </div>
+        </div>
+<!--Journalist-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="journalist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/journalist-hex.png" height="150" alt="Journalist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>My journalism background started in the beginning of my adult life as high school senior. I found that I enjoyed learning about events and reporting them to those around me. Later, I continued as a contributing writer at UMBC. I've covered topics ranging from health care, political issues, to economic problems in society. My focus is more passionately centered around local issues.
+</p>
+                        <p>I believe the largest impact can be made if we can convince those around us to become more active citizens. I started a blog after I finished writing for the university paper, and targeted that blog at the UMBC community. Due to some of the roles I had in student organizations, I was able to discuss topics that university students find important such as student fees, sports discussions, and student government.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="journalist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">5 Years (from 2009)</div>
+            </div>
+        </div>
+<!--Musician-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="musician.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/musician-hex.png" height="150" alt="Musician" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>Since I was in fourth grade, I have played the Trumpet. Throughout my childhood schooling, I was always interested in music, and I think that had a part to play in my role as first chair trumpet through most of my concert and marching band positions. I think I was defined to a great extent by the numerous solos that I've had. I remember standing on the field of my high school football field during the half time show.
+</p>
+                        <p>I had covered my trumpet in black and orange paint to show my personal spirit. Sweat dripping from my nose, I held the trumpet mouthpiece to my lips and started one of the most powerful experiences I have had. The sound carried to the entire audience and the crowd cheered. As I returned back into the formation of the entire marching band, I realized that I had just demonstrated the synchronicity that I think every human calls community.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="musician.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">14 Years (from 2000)</div>
+            </div>
+        </div>
+<!--Natural Scientist-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="natural-scientist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/natural-scientist-hex.png" height="150" alt="Natural Scientist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>I graduated from UMBC in May 2013, and I was having a difficult moment in attempting to find my first post-academic employment. With a large amount of free time, I decided to look into learning more on my own, and I'm glad I did because I can now appreciate fully the magnitude of nanoscale particles at work every day. I studied organic chemistry, biology, genetics, and more!
+</p>
+                        <p>But the real take-away from the experience is the knowledge I have of exciting developments with carbon nanotubes and nanotechnologies. The implication that one day soon humanity will be able to replicate its desires at a whim is unbelievably cool! I wont say any more on this topic only because I am still developing a more comprehensive understanding of this new frontier.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="natural-scientist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">2 Years (from 2012)</div>
+            </div>
+        </div>
+<!--Painter-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="painter.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/painter-hex.png" height="150" alt="painter" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>My focus in high school art classes lead me to acrylic paintings. I enjoyed using the paint to create impressionism works and I discovered that while French society may have deemed this work to be fake art, and the Nazi regime called it degenerate, the demand for photo-realism has not wavered in the United States. My high school instructors were encouraging, but I did not receive any awards.
+</p>
+                        <p>I quickly noticed that recognition on a county level was – at least a the time – given to those who conformed their artistic style to the standards at play. The happy ending to this story is a good one, because I now have a great hobby. At the time, this blessing in disguise gave me opportunity to hone other interests.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="painter.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">9 Years (from 2005)</div>
+            </div>
+        </div>
+<!--Photographer-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="photographer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/photographer-hex.png" height="150" alt="Photographer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>My ability to take awe-inspiring pictures has been touted by previous mentors of mine, but I see photography as a tool for my graphic design passions. I enjoy creating panoramas because I know that humans don't really notice the curvature of the Earth, and I think that the camera really does. Also, photos that require longer shutter exposures are always addictive and challenging for me because I like the puzzle of balancing f-stop and shutter speed.
+</p>
+                        <p>An idea for exploration is creating mixed media pieces combining multiple photographs with other fine art mediums. I haven't had the opportunity to take this direction completely, but I have a large stock of photos that I plan on sharing and making open under the GPLv3 license. I think it would be pretty beneficial if more artists and photographers collaborated, so I want to do my part, too!
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="photographer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">6 Years (from 2008)</div>
+            </div>
+        </div>
+<!--Political Economist-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="political-economist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/political-economist-hex.png" height="150" alt="Political Economist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>Quite a few of my university instructors gave me the freedom to explore controversial ideas, and I was able to determine the beneficial and detrimental aspects of the current economic system. If we all understand the economy has an etymological root to the idea of household management, then we should also understand that changes ought to be made if our household is not in order.
+</p>
+                        <p>I determined that some of the failures in our markets are caused by major problems of asymmetric information in our securities exchanges. And I picked this topic as a study due to a research grant I received as an undergraduate student at UMBC. I studied the two economic structures of Germany and the United States, and more specifically, what caused AIG to fail in the United States and what allowed Allianz in Germany to survive.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="political-economist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+<!--Social Activist-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="social-activist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/social-activist-hex.png" height="150" alt="Social Activist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>In both my junior and senior years at UMBC, I ran for student government president. Formally, I believe I lost both times. Informally, I believe I accomplished my goals because I was able to fundamentally change the institutional structures of student life. While my changes may not have been dramatic in the short term, I see any change as a possible tipping point. I won't know for sure, so this chapter in my life is closed for now.
+</p>
+                        <p>On the same topic of activism, I was highly involved in leadership positions at UMBC. Founding the Entrepreneurial Society, Visual Arts Council of Majors, Political Science Council of Majors, and leading other groups like Model UN, I was able to develop my civil actions and communication abilities.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="social-activist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">5 Years (from 2009)</div>
+            </div>
+        </div>
+<!--Social Scientist-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="social-scientist.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/social-scientist-hex.png" height="150" alt="Social Scientist" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>My passion as a system theorist allows me to perceive a world on interconnected parts. I find that different balancing and reinforcing loops create a system that relies strongly on a fragile and delicate set of institutional structures. Their historical context changes the cultures of the planet, and if humanity precisely changes, the overall impact for our destiny will too.
+</p>
+                        <p>Now we must understand that social contexts will dramatically impact that of our environment, and thereby also limiting the amount of energy at our disposal. We really ought to find that our Earth is a spaceship, hurdling through the cosmos at a currently incomprehensible speed.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="social-scientist.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+<!--Sound Designer-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="sound-designer.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/sound-designer-hex.png" height="150" alt="Sound Designer" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>At 98ROCK, I was able to to learn an entirely new set of skills that changed my outlook on one of our senses. I knew that the internships I had would allow me to understand myself better, but I couldn't have predicted that my learning processes would fundamentally alter. I found myself listening to music as a way to interpret information differently. I could remember the information only by recalling the song that I listened to – wild experience, right?
+</p>
+                        <p>I was inspired by all the people I came into contact with, and I found that I had all the same insecurities and fears and hopes of all my peers. Even after meeting celebrities and politicians, the same rules applied. Learning throughout my back-to-back internships gave me a great deal of preparation that extended across the enhanced audio visual techniques I have now.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="sound-designer.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">3 Years (from 2011)</div>
+            </div>
+        </div>
+<!--World Historian-->
+		<div class="row">
+            <div class="panel panel-inverse">
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2 panelPadding">
+                        <a href="world-historian.html"><img class="roleIconDetailed" src="imagery/web-rdy_icons/world-historian-hex.png" height="150" alt="World Historian" /></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>I never studied formally with a dedicated world history professor, but I consistently discover more about the world from academic, corporate, government, and other forms of media. Moreover, I've witnessed in my own experiences the importance of having a context for world events ever since I was in middle school.
+</p>
+                        <p>Currently, the world is experiencing dramatic changes in its social, political, and economic arenas. It is profound to understand that the system of collective histories that states have all have one root, and all merge into a one human historical narrative.
+</p>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <a class="btn btn-success btnMargin" href="world-historian.html" role="button">Discover more &raquo;</a></p>
+                    </div>
+                </div>
+              </div>
+              <div class="panel-footer">4 Years (from 2010)</div>
+            </div>
+        </div>
+
+      <hr>
+
+      <footer>
+        <p>GPLv3 . Nathaniel Buechler . 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+<!--Windows Phone JS Hack-->
+<script type="text/javascript">
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle)
+}
+</script>
+
+<!--CREDIT: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").mCustomScrollbar({
+				horizontalScroll:true,
+				theme:"dark-thin"
+				});
+        });
+    })(jQuery);
+</script>
+
+
+
+
+
+
+  </body>
+</html>

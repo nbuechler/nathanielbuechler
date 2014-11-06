@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+
+.slider2{
+width: 800px;
+margin: 0 auto;
+}
+
+#slider2{
+width: 800px;
+height: 270px;
+overflow: hidden;
+margin: 30px auto;
+}
+
+#slider2 > img{
+width: 800px;
+height: 270px;
+float: left;
+display: none;
+}
+
+a.l2eft{
+float: left;
+}
+
+a.r2ight{
+float: right;
+}

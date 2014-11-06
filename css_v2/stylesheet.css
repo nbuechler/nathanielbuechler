@@ -1,0 +1,266 @@
+@charset "utf-8";
+/* CSS Document */
+/* Links */
+a:link {
+	color: #FFF;
+	text-decoration: none;
+}
+a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+a:hover {
+	color: #444;
+	text-decoration: none;
+}
+a:active {
+	color: #000;
+	text-decoration: none;
+}
+/* End Links */
+
+body {
+	background-image: url(../imagery/bkgd/bkgd_v2.jpg);
+	background-position: top;
+	background-color: #000;
+	background-repeat: no-repeat;
+	font-size: 62.5%;
+	}
+#main {
+	background-image: url(../imagery/bkgd/bkgd_v2.jpg);
+	background-position: top;
+	background-color: #000;
+	background-repeat: no-repeat;
+	font-size: 62.5%;
+	}
+#home {
+	background-image: url(../imagery/bkgd/bkgd_v2_index.jpg);
+	background-position: top;
+	background-color: #000;
+	background-repeat: no-repeat;
+	font-size: 62.5%;
+}
+#science {
+	background-image: url(../imagery/bkgd/bkgd_v2_science.jpg);
+	background-position: top;
+	background-color: #000;
+	background-repeat: no-repeat;
+	font-size: 62.5%;
+}
+#wrapper {
+	max-width: 1024px;
+	max-width: 1024px;
+	max-height: 700px;
+	min-height: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1em;
+	padding-right: 1em;
+	background: url(../imagery/bkgd/bkdg-1px-slice1024x750.png) repeat-y center;
+}
+#wrapper #header {
+	margin-left: 2%;
+	margin-right: 2%;
+	max-height: 70px;
+	min-height: 50px;
+	min-width: 500px;
+	overflow: hidden;
+}
+#wrapper #contactbar {
+	text-align: right;
+	color: #FFF;
+	font-family: "Verdana";
+	font-size: 10px;
+	padding-bottom: 1%;
+	margin-left: 2%;
+	margin-right: 2%;
+	max-height: 75px;
+	min-height: 50px;
+	min-width: 500px;
+	overflow: hidden;
+	float: right;
+}
+
+#wrapper #contactbar p {
+	font-size: 10px;
+}
+#wrapper #stagingarea {
+	font-family: "Verdana";
+	background: url(../imagery/bkgd/bkgd_v3-900x300-cut.png) no-repeat;
+	border: #000 thin groove;
+	color: #FFF;
+	text-align: center;
+	margin-top: 2%;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 350px;
+	max-height: 350px;
+	min-width: 900px;
+}
+#wrapper #stagingarea2 {
+	font-family: "Verdana";
+	background: url(../imagery/bkgd/bkgd_v3-900x300-cut_science.png) no-repeat;
+	border: #000 thin groove;
+	color: #FFF;
+	text-align: center;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 350px;
+	max-height: 350px;
+	min-width: 900px;
+}
+
+#wrapper #stagingarea #basic h1 {
+	color: #4A3F39;
+	font-family: "Verdana";
+	font-variant: small-caps;
+	font-size: 2 em;
+}
+#wrapper #stagingarea2 #basic h1 {
+	color: #4A3F39;
+	font-family: "Verdana";
+	font-variant: small-caps;
+	font-size: 2 em;
+}
+#wrapper #stagingarea #basic p {
+	color: #0E0E10;
+	font-family: "Verdana";
+	font-weight: 500;
+	font-size: 1.2 em;
+}
+#wrapper #stagingarea2 #basic p {
+	color: #0E0E10;
+	font-family: "Verdana";
+	font-weight: 500;
+	font-size: 1.2 em;
+}
+#wrapper #stagingarea #floater #basic {
+	background-color: #FFF;
+	font-family: "Verdana";
+	color: #1D1715;
+	clear: both;
+	height: 240px;
+	position: relative;
+	border: #000 groove;
+	overflow: auto;
+}
+#wrapper #stagingarea2 #floater #basic {
+	background-color: #FFF;
+	font-family: "Verdana";
+	color: #1D1715;
+	clear: both;
+	height: 240px;
+	position: relative;
+	border: #000 groove;
+	overflow: auto;
+}
+#wrapper #stagingarea #floater {
+	float: left;
+	height: 50%;
+	margin-bottom: -120px;
+	width: 37%;
+	padding: 2.5%;
+	margin-left: 2.5%;
+	margin-bottom:: 2.5%;
+	margin-top: 2.5%;
+}
+#wrapper #stagingarea2 #floater {
+	float: left;
+	height: 50%;
+	margin-bottom: -120px;
+	width: 37%;
+	padding: 2.5%;
+	margin-left: 2.5%;
+	margin-bottom:: 2.5%;
+	margin-top: 2.5%;
+}
+#wrapper #stagingarea #icon-table {
+	float: right;
+	width: 50%;
+	padding: 2.5%;
+	font-family: "Verdana";
+	font-size: medium;
+	color: #1D1715;
+}
+#wrapper #stagingarea2 #icon-table {
+	float: right;
+	width: 50%;
+	padding: 2.5%;
+	font-family: "Verdana";
+	font-size: medium;
+	color: #1D1715;
+}
+#wrapper #copyright {
+	font-family: "Verdana";
+	font-size: 1.5em;
+	text-transform: capitalize;
+	color: #FFF;
+	text-align: center;
+	padding: .1em;
+	margin: .1em;
+	min-width: 1025px;
+	max-width: 1025px;
+	overflow: hidden;
+}
+#wrapper #stagingarea #icon-table table tr td img {
+	opacity:1.0;
+	filter:alpha(opacity=100);  /* For IE8 and earlier */
+}
+#wrapper #stagingarea #icon-table table tr td img:hover {
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+#wrapper #stagingarea2 #icon-table table tr td img {
+	opacity:1.0;
+	filter:alpha(opacity=100);  /* For IE8 and earlier */
+}
+#wrapper #stagingarea2 #icon-table table tr td img:hover {
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+#wrapper #display {
+	font-family: "Verdana";
+	color: #FFF;
+	text-align: center;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 230px;
+	max-height: 230px;
+	min-width: 900px;
+}
+#wrapper #display #nav-table {
+	float: left;
+	text-align: center;
+	max-width: 240px;
+	min-width: 240px;
+	min-height: 230px;
+	max-height: 230px;
+}
+#wrapper #display #right-box {
+	float: right;
+	max-width: 620px;
+	min-width: 620px;
+	min-height: 230px;
+	max-height: 230px;
+	overflow: hidden;
+}
+#wrapper #display #nav-table table tr td {
+	opacity:1.0;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+}
+#wrapper #display #nav-table table tr td:hover {
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+#wrapper #display #right-box #info h2 {
+	font-size: 3em;
+	text-align: left;
+}
+#wrapper #display #right-box #info h4 {
+	text-align: left;
+	font-size: .9em;
+}
+#wrapper #display #right-box #info #default {
+	float: right;
+	margin: 2%;
+}

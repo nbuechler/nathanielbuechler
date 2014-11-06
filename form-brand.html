@@ -1,0 +1,672 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/defaultProfilePrimary.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Nathaniel Buechler</title>
+<!-- InstanceEndEditable -->
+
+<!-- The first version of this website is made using Adobe Dreamweaver, Adbobe Illustrator, Adobe Photoshop, and jQuery, CSS3, HTML5, D3.js. -->
+
+<!-- jQuery-->
+<script src="js/jquery-1.11.0.min.js"></script>
+
+<!-- Lightbox -->
+<script src="js/lightbox.min.js"></script>
+<link href="css/lightbox.css" rel="stylesheet" />
+
+<!-- Latest compiled and minified CSS -->
+<!-- http://bootswatch.com/ for different themes -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap.min.css"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap-theme.min.css"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- Google Font -->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+<!--JQUERY UI 1.10.4-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="css_v2/jquery-ui-1.10.4.custom.min.css">
+
+<!--SCROLLBAR: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<link href="css_v2/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- InstanceBeginEditable name="head" -->
+
+<!-- InstanceEndEditable -->
+</head>
+
+<!--D3JS Version 3-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<!--d3-tip: http://labratrevenge.com/d3-tip/-->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<style>
+
+/* Windows Phone IE Hack*/
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/*Bootstrap Starter */
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+</style>
+
+<style>
+
+.axis {
+  font: 10px 'Lato', sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}  
+  
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  border: white 2px solid;
+}
+
+/* Creates a small triangle extender for the tooltip */
+/*
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+*/
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+</style>
+
+<style>
+
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+</style>
+
+<style>
+
+.imageThumb{
+	margin: 20px;
+	border: double 4px black;
+	}
+
+</style>
+	<!-- InstanceBeginEditable name="backgroundMod" -->
+
+<style>
+
+#backgroundHolder{
+	width: 100%;
+	background:url(imagery/bkgd/bkgd_v2_index.gif);
+	background-repeat: no-repeat;
+	background-color: black;
+	}
+
+</style>
+
+	<!-- InstanceEndEditable -->
+
+<style>
+
+.container {
+	font-family: 'Lato', sans-serif;
+	}
+
+h1{
+	font-family: 'Lato', sans-serif;
+	}
+
+h2{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+p{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+.btnMargin{
+	margin-top: 20px;
+	}
+	
+#roleBar{
+	text-align: center;
+	}
+
+.panelPadding {
+	padding-bottom: 3%;
+	}
+
+.roleIcon{
+	width: 73px;
+	margin: 1%;
+	}
+	
+.roleDetailed{
+	}
+
+.roleIcon:hover, .roleIconDetailed:hover{
+	opacity: .3;
+	}
+
+.hextopshift{
+	margin-bottom: -78px;
+	text-align: center;
+	}
+
+.hexrightshift{
+	margin-left: 0px;
+	}
+	
+.hexleftshift{
+	margin-right: 0px;
+	}
+
+.hexshift-1{
+	position: relative;
+	margin-top: 0px;
+	}
+.hexshift-2{
+	position: relative;
+	margin-top: 77px;
+	}
+.hexshift-3{
+	position: relative;
+	margin-top: 155px;
+	}
+.hexshift-4{
+	position: relative;
+	margin-top: 233px;
+	}
+.hexshift-5{
+	position: relative;
+	margin-top: 311px;
+	}
+.hexshift-6{
+	position: relative;
+	margin-top: 389px;
+	}
+.hexshift-7{
+	position: relative;
+	margin-top: 467px;
+	}
+	
+.canvasHolderBkgd{
+	background-color: #D3D3D3
+	}	
+	
+/* Scrollbar styled and fun */
+.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto; }
+.scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+.scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+.scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
+
+	
+</style>
+
+<style>
+
+.hextopshiftAlt{
+	margin-bottom: -78px;
+	text-align: center;
+	}
+
+.hexrightshiftAlt{
+	margin-left: 0px;
+	}
+	
+.hexleftshiftAlt{
+	margin-right: 0px;
+	}
+
+.hexshift-1Alt{
+	position: relative;
+	margin-top: 0px;
+	}
+.hexshift-2Alt{
+	position: relative;
+	margin-top: 77px;
+	}
+.hexshift-3Alt{
+	position: relative;
+	margin-top: 155px;
+	}
+.hexshift-4Alt{
+	position: relative;
+	margin-top: 233px;
+	}
+.hexshift-5Alt{
+	position: relative;
+	margin-top: 311px;
+	}
+.hexshift-6Alt{
+	position: relative;
+	margin-top: 389px;
+	}
+.hexshift-7Alt{
+	position: relative;
+	margin-top: 467px;
+	}
+
+.roleIconAlt{
+	width: 100%;
+	margin: 1%;
+	}
+
+.roleIconAlt:hover{
+	opacity: .3;
+	}
+
+.special-footer{
+	
+	}
+.special-body{
+	
+	}
+
+</style>
+
+<!-- InstanceBeginEditable name="style" -->
+<style>
+
+
+
+</style>
+<!-- InstanceEndEditable -->
+
+
+<body id="backgroundHolder">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.nathanielbuechler.com">Multifaceted Specialist</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <!--
+            <li><a href="data-engineering.html">Data Engineering</a></li>
+            <li><a href="system-thinking.html">Systems Thinking</a></li>
+            -->
+            <li><a href="rolePerspective.html">Roles</a></li>
+            <li><a href="skillPerspective.html">Skills</a></li>
+			<li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+    	<div class="panel panel-inverse" style="margin-top: 50px;">
+        <div class="panel-body special-body">
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+                <a href="artist.html"><img class="roleIconAlt" id="artistNav" src="imagery/web-rdy_icons/artist.jpg" alt="artist" /></a>
+            </div>
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            	<a href="social-scientist.html"><img class="roleIconAlt" id="socialNav" src="imagery/web-rdy_icons/social-scientist.jpg" alt="social_scientist" /></a>
+            </div>
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            	<a href="computer-programmer.html"><img class="roleIconAlt" id="programmerNav" src="imagery/web-rdy_icons/computer-programmer.jpg" alt="computer_programmer" /></a>
+            </div>
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            	<a href="natural-scientist.html"><img class="roleIconAlt" id="scientistNav" src="imagery/web-rdy_icons/natural-scientist.jpg" alt="natural_scientist" /></a>
+            </div>
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            	<a href="engineer.html"><img class="roleIconAlt" id="engineerNav" src="imagery/web-rdy_icons/engineer.jpg" alt="engineer" /></a>
+            </div>
+			<div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            
+           
+            </div>
+	 </div><!--End Panel Body -->
+     
+     
+     <div class="panel-footer special-footer" id="artFooter">
+        <a href="painter.html"><img class="roleIcon" src="imagery/web-rdy_icons/painter.jpg" alt="painter" /></a>     
+        <a href="photographer.html"><img class="roleIcon" src="imagery/web-rdy_icons/photographer.jpg" alt="photographer" /></a>
+        <a href="graphic-designer.html"><img class="roleIcon" src="imagery/web-rdy_icons/graphic-designer.jpg" alt="graphic-designer" /></a>
+        <a href="sound-designer.html"><img class="roleIcon" src="imagery/web-rdy_icons/sound-designer.jpg" alt="sound-designer" /></a>
+        <a href="musician.html"><img class="roleIcon" src="imagery/web-rdy_icons/musician.jpg" alt="musician" /></a>
+     </div>
+     <div class="panel-footer special-footer" id="socialFooter">
+     	<a href="journalist.html"><img class="roleIcon" src="imagery/web-rdy_icons/journalist.jpg" alt="journalist" /></a>
+     	<a href="world-historian.html"><img class="roleIcon" src="imagery/web-rdy_icons/world-historian.jpg" alt="world historian" /></a>
+        <a href="political-economist.html"><img class="roleIcon" src="imagery/web-rdy_icons/political-economist.jpg" alt="political economist" /></a>
+        <a href="social-activist.html"><img class="roleIcon" src="imagery/web-rdy_icons/social-activist.jpg" alt="social activist" /></a>
+        <a href="comparative-institutionalist.html"><img class="roleIcon" src="imagery/web-rdy_icons/comparative-institutionalist.jpg" alt="comparative institutionalist"/></a>
+        <a href="cultural-anthropologist.html"><img class="roleIcon" src="imagery/web-rdy_icons/cultural-anthropologist.jpg" alt="cultural_anthropologist" /></a>
+     </div>
+     <div class="panel-footer special-footer" id="programmerFooter">
+		<a href="back-end-developer.html"><img class="roleIcon" src="imagery/web-rdy_icons/back-end-developer.jpg" alt="back-end developer"/></a>
+		<a href="front-end-developer.html"><img class="roleIcon" src="imagery/web-rdy_icons/front-end-developer.jpg" alt="front-end developer" /></a>
+     </div>
+     <div class="panel-footer special-footer" id="scientistFooter">
+     </div>
+     <div class="panel-footer special-footer" id="engineerFooter">
+     </div>
+     
+     
+     </div><!--End Panel-->
+    <!-- InstanceBeginEditable name="container" -->
+ 
+		<div class="row">
+        	<div class="panel panel-footer">
+                    	
+                        <h3>Fundamentally Open Source and Resilient Manufacturing (FORM)</h3>
+                        <div>The purpose of FORM is strictly educational and artistic hence any intellectual property it may be similar to is covered under fair-use. This project does not currently seek to profit and does not plan to compete with other entities. It is clearly a concept created to brand a resilient community of citizen creators. Finally, I would appreciate any <a href="contact.html"> feedback and suggestions.</a></div> 
+                        <div>For other inquiries, please <a href="mailto:natebuechler@gmail.com?Subject=Hello%20Nathaniel">E-mail me directly - natebuechler (at) gmail (dot) com </a>.</div>
+                        
+                        <h4><a href="imagery/everything_portfolio/roles/graphicDesigner/RAW/FORM-Brand-Guide.pdf">Download the full branding guide by clicking here!</a></h4>
+                        
+            </div>
+        
+            <div class="panel panel-body">
+            	<div class="row" style="text-align: center;">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_01.jpg" data-lightbox="form" data-title="Page 1"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_01.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_02.jpg" data-lightbox="form" data-title="Page 2"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_02.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_03.jpg" data-lightbox="form" data-title="Page 3"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_03.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_04.jpg" data-lightbox="form" data-title="Page 4"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_04.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_05.jpg" data-lightbox="form" data-title="Page 5"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_05.jpg" width="150" height="150" alt="img" /></a>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_06.jpg" data-lightbox="form" data-title="Page 6"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_06.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_07.jpg" data-lightbox="form" data-title="Page 7"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_07.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_08.jpg" data-lightbox="form" data-title="Page 8"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_08.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_09.jpg" data-lightbox="form" data-title="Page 9"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_09.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_10.jpg" data-lightbox="form" data-title="Page 10"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_10.jpg" width="150" height="150" alt="img" /></a>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_11.jpg" data-lightbox="form" data-title="Page 11"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_11.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_12.jpg" data-lightbox="form" data-title="Page 12"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_12.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_13.jpg" data-lightbox="form" data-title="Page 13"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_13.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_14.jpg" data-lightbox="form" data-title="Page 14"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_14.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_15.jpg" data-lightbox="form" data-title="Page 15"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_15.jpg" width="150" height="150" alt="img" /></a>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_16.jpg" data-lightbox="form" data-title="Page 16"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_16.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_17.jpg" data-lightbox="form" data-title="Page 17"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_17.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_18.jpg" data-lightbox="form" data-title="Page 18"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_18.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_19.jpg" data-lightbox="form" data-title="Page 19"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_19.jpg" width="150" height="150" alt="img" /></a>
+                    <a href="imagery/everything_portfolio/roles/graphicDesigner/WR/FORM-Brand-Guide_Page_20.jpg" data-lightbox="form" data-title="Page 20"><img class="imageThumb" src="imagery/everything_portfolio/roles/graphicDesigner/T/FORM-Brand-Guide_Page_20.jpg" width="150" height="150" alt="img" /></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+      <hr />
+
+	<!-- InstanceEndEditable -->
+      <footer>
+        <p>GPLv3 . Nathaniel Buechler . 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+<!-- InstanceBeginEditable name="script" -->
+<script>
+    
+
+	
+</script>
+<!-- InstanceEndEditable -->
+
+<!-- Nav Bar D3JS -->
+<script>
+    
+	d3.select("#artFooter").style("opacity", 0).style("display", "none");
+	d3.select("#socialFooter").style("opacity", 0).style("display", "none");
+	d3.select("#programmerFooter").style("opacity", 0).style("display", "none");
+	d3.select("#scientistFooter").style("opacity", 0).style("display", "none");
+	d3.select("#engineerFooter").style("opacity", 0).style("display", "none");
+
+	d3.select("#scientistNav")
+		.on("mouseenter", function() {
+			d3.select("#socialFooter").style("display", "none");
+			d3.select("#programmerFooter").style("display", "none");
+			d3.select("#artFooter").style("display", "none");
+		});
+	
+	d3.select("#engineerNav")
+		.on("mouseenter", function() {
+			d3.select("#socialFooter").style("display", "none");
+			d3.select("#programmerFooter").style("display", "none");
+			d3.select("#artFooter").style("display", "none");
+		});
+	
+	d3.select(".special-body")
+		.on("mouseenter", function() {
+			d3.select("#socialFooter").style("display", "none");
+			d3.select("#programmerFooter").style("display", "none");
+			d3.select("#artFooter").style("display", "none");
+		});	
+	
+	d3.select("#artistNav")
+		.on("mouseenter", function() {
+			d3.select("#socialFooter").style("display", "none");
+			d3.select("#programmerFooter").style("display", "none");
+			d3.select("#artFooter").transition()
+      		.duration(500).style("opacity", 1).style("display", "");
+
+		})
+		.on("mouseleave", function() {
+			d3.select(".special-body")
+				.on("mouseenter", function() {
+					d3.select("#socialFooter").style("display", "none");
+					d3.select("#programmerFooter").style("display", "none");
+					d3.select("#artFooter").style("display", "");
+				})
+				.on("mouseleave", function() {
+					d3.select("#artFooter")
+						.on("mouseenter", function() {
+							d3.select(this).style("display", "");	
+						})
+						.on("mouseleave", function() {
+							d3.select(this).style("display", "none");	
+						});
+				});
+		});
+	
+	d3.select("#programmerNav")
+		.on("mouseenter", function() {
+			d3.select("#artFooter").style("display", "none");
+			d3.select("#socialFooter").style("display", "none");
+			d3.select("#programmerFooter").transition()
+      		.duration(500).style("opacity", 1).style("display", "");
+
+		})
+		.on("mouseleave", function() {
+			d3.select(".special-body")
+				.on("mouseenter", function() {
+					d3.select("#artFooter").style("display", "none");
+					d3.select("#socialFooter").style("display", "none");
+					d3.select("#programmerFooter").style("display", "");
+				})
+				.on("mouseleave", function() {
+					d3.select("#programmerFooter")
+						.on("mouseenter", function() {
+							d3.select(this).style("display", "");	
+						})
+						.on("mouseleave", function() {
+							d3.select(this).style("display", "none");	
+						});
+				});
+		});	
+	
+	d3.select("#socialNav")
+		.on("mouseenter", function() {
+			d3.select("#artFooter").style("display", "none");
+			d3.select("#programmerFooter").style("display", "none");
+			d3.select("#socialFooter").transition()
+      		.duration(500).style("opacity", 1).style("display", "");
+
+		})
+		.on("mouseleave", function() {
+			d3.select(".special-body")
+				.on("mouseenter", function() {
+					d3.select("#artFooter").style("display", "none");
+					d3.select("#programmerFooter").style("display", "none");
+					d3.select("#socialFooter").style("display", "");
+				})
+				.on("mouseleave", function() {
+					d3.select("#socialFooter")
+						.on("mouseenter", function() {
+							d3.select(this).style("display", "");	
+						})
+						.on("mouseleave", function() {
+							d3.select(this).style("display", "none");	
+						});
+				});
+		});	
+	
+	
+	
+
+	
+</script>
+
+<!--Windows Phone JS Hack-->
+<script type="text/javascript">
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle)
+}
+</script>
+
+<!--CREDIT: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").mCustomScrollbar({
+				horizontalScroll:true,
+				theme:"dark-thin"
+				});
+        });
+    })(jQuery);
+</script>
+
+
+
+<!--If you can read this, then I hope we talk soon! :D!-->
+
+
+
+  </body>
+<!-- InstanceEnd --></html>

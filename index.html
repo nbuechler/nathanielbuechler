@@ -1,0 +1,1129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nathaniel Buechler</title>
+
+<!-- jQuery-->
+<script src="js/jquery-1.11.0.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<!-- http://bootswatch.com/ for different themes -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap.min.css"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap-theme.min.css"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- Google Font -->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+<!--JQUERY UI 1.10.4-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="css_v2/jquery-ui-1.10.4.custom.min.css">
+
+<!--SCROLLBAR: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<link href="css_v2/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+
+<!--D3JS Version 3-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<!--d3-tip: http://labratrevenge.com/d3-tip/-->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<style>
+
+/* Windows Phone IE Hack*/
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/*Bootstrap Starter */
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+</style>
+
+<style>
+
+.axis {
+  font: 10px 'Lato', sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}  
+  
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  border: white 2px solid;
+}
+
+/* Creates a small triangle extender for the tooltip */
+/*
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+*/
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+</style>
+
+<style>
+
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+</style>
+
+<style>
+
+#backgroundHolder{
+	width: 100%;
+	background:url(imagery/bkgd/bkgd_v2_index.gif);
+	background-repeat: no-repeat;
+	background-color: black;
+	}
+
+.container {
+	font-family: 'Lato', sans-serif;
+	}
+
+h1{
+	font-family: 'Lato', sans-serif;
+	}
+
+h2{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+p{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+.btnMargin{
+	margin-top: 20px;
+	}
+	
+#roleBar{
+	padding-top: 56px;
+	bottom: 48px;
+	}
+	
+.canvasHolderBkgd{
+	background-color: #D3D3D3
+	}	
+
+.roleIcon{
+	width: 87px;
+	margin: 20px;
+	}
+
+.roleIcon:hover{
+	opacity: .3;
+	}
+
+.hextopshift{
+	margin-bottom: -78px;
+	text-align: center;
+	}
+
+.hexrightshift{
+	margin-left: 0px;
+	}
+	
+.hexleftshift{
+	margin-right: 0px;
+	}
+
+.hexshift-1{
+	position: relative;
+	margin-top: 0px;
+	}
+.hexshift-2{
+	position: relative;
+	margin-top: 77px;
+	}
+.hexshift-3{
+	position: relative;
+	margin-top: 155px;
+	}
+.hexshift-4{
+	position: relative;
+	margin-top: 233px;
+	}
+.hexshift-5{
+	position: relative;
+	margin-top: 311px;
+	}
+.hexshift-6{
+	position: relative;
+	margin-top: 389px;
+	}
+.hexshift-7{
+	position: relative;
+	margin-top: 467px;
+	}
+	
+/* Scrollbar styled and fun */
+.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto; }
+.scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+.scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+.scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
+
+	
+</style>
+
+
+</head>
+
+<body id="backgroundHolder">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.nathanielbuechler.com">Multifaceted Specialist</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            
+            <!--
+            <li><a href="data-engineering.html">Data Engineering</a></li>
+            <li><a href="system-thinking.html">Systems Thinking</a></li>
+            -->
+            <li><a href="rolePerspective.html">Roles</a></li>
+            
+            
+            <li><a href="skillPerspective.html">Skills</a></li>
+			<li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+          <div class="row">
+          	 <div class="col-12 col-sm-12 col-lg-12" style="text-align: center;">
+                 <h2>Nathaniel Buechler</h2>
+                 <h4>Multifaceted Specialist</h4>
+                 <h5>
+                 Currently I enjoy learning, and I hope that never changes because I'm passionate about connecting the many different topics I love with many "lens" of knowledge. Below you will see a few different visualizations to spark your interest about my interests. Please, enjoy my website!
+                 </h5>
+             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-5" style="text-align: center; padding-bottom: 5%; padding-top: 5%;">
+            	<img src="imagery/default-hex.png" alt="Nathan"/>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" id="roleBar">
+            	
+            
+                <div class="hextopshift">
+                <a href="artist.html"><img class="roleIcon" src="imagery/web-rdy_icons/artist-hex.png" alt="artist" /></a>
+                <a href="painter.html"><img class="roleIcon" src="imagery/web-rdy_icons/painter-hex.png" alt="painter" /></a>
+                <a href="photographer.html"><img class="roleIcon" src="imagery/web-rdy_icons/photographer-hex.png" alt="photographer" /></a>
+                </div>
+                
+                <div class="hextopshift hexrightshift">
+                <a href="graphic-designer.html"><img class="roleIcon" src="imagery/web-rdy_icons/graphic-designer-hex.png" alt="graphic-designer" /></a>
+                <a href="sound-designer.html"><img class="roleIcon" src="imagery/web-rdy_icons/sound-designer-hex.png" alt="sound-designer" /></a>
+                </div>
+                
+                <div class="hextopshift">
+                <a href="musician.html"><img class="roleIcon" src="imagery/web-rdy_icons/musician-hex.png" alt="musician" /></a>
+                <a href="journalist.html"><img class="roleIcon" src="imagery/web-rdy_icons/journalist-hex.png" alt="journalist" /></a>
+                <a href="world-historian.html"><img class="roleIcon" src="imagery/web-rdy_icons/world-historian-hex.png" alt="world historian" /></a>
+                </div>
+                
+                <div class="hextopshift hexrightshift">
+                <a href="political-economist.html"><img class="roleIcon" src="imagery/web-rdy_icons/political-economist-hex.png" alt="political economist" /></a>
+                <a href="social-activist.html"><img class="roleIcon" src="imagery/web-rdy_icons/social-activist-hex.png" alt="social activist" /></a>
+                </div>
+                
+                <div class="hextopshift">
+                <a href="social-scientist.html"><img class="roleIcon" src="imagery/web-rdy_icons/social-scientist-hex.png" alt="social_scientist" /></a>
+                <a href="comparative-institutionalist.html"><img class="roleIcon" src="imagery/web-rdy_icons/comparative-institutionalist-hex.png" alt="comparative institutionalist"/></a>
+                <a href="cultural-anthropologist.html"><img class="roleIcon" src="imagery/web-rdy_icons/cultural-anthropologist-hex.png" alt="cultural_anthropologist" /></a>
+                </div>
+                
+                <div class="hextopshift hexrightshift">
+                <a href="engineer.html"><img class="roleIcon" src="imagery/web-rdy_icons/engineer-hex.png" alt="engineer" /></a>
+                <a href="computer-programmer.html"><img class="roleIcon" src="imagery/web-rdy_icons/computer-programmer-hex.png" alt="computer_programmer" /></a>
+                </div>
+                
+                <div class="hextopshift">
+                <a href="back-end-developer.html"><img class="roleIcon" src="imagery/web-rdy_icons/back-end-developer-hex.png" alt="back-end developer"/></a>
+                <a href="front-end-developer.html"><img class="roleIcon" src="imagery/web-rdy_icons/front-end-developer-hex.png" alt="front-end developer" /></a>
+                <a href="natural-scientist.html"><img class="roleIcon" src="imagery/web-rdy_icons/natural-scientist-hex.png" alt="natural_scientist" /></a>          
+                </div>
+                
+             </div>
+          </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+              <h2>Role Perspective</h2>
+              <div class="content canvasHolderBkgd">
+              	<div id="roleChart" style="font: white;"></div>
+              	<div id="roleFocus"></div>
+              </div>
+              <p><a class="btn btn-info btnMargin" href="rolePerspective.html" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="col-12 col-sm-12 col-lg-12">
+              <h2>Skill Perspective</h2>
+              <div class="content canvasHolderBkgd">
+              	<div id="navSunBurst" style="font: white;"></div>
+              </div>
+              <p><a class="btn btn-info btnMargin" href="skillPerspective.html" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+          	<a href="Nathaniel_Buechler-UI.UX-Engineer.pdf" class="list-group-item list-group-item-info">R&#233sum&#233</a>
+
+          
+            <li style="color: white;" class="list-group-item active">Perspectives</li>
+            <a href="rolePerspective.html" class="list-group-item">Role Perspective</a>
+            <a href="skillPerspective.html" class="list-group-item">Skill Perspective</a>
+            
+            <!--
+            <li style="color: white;" class="list-group-item active">Blogs</li>
+            <a href="http://nathanielbuechler.com/dataengineering/" class="list-group-item">Data Engineering Blog (in progress!)</a>
+            <a href="http://nathanielbuechler.com/systemsthinking/" class="list-group-item">Systems Thinking Blog (in progress!)</a>
+            -->
+            
+            <li style="color: white;" class="list-group-item active">Print Books</li>
+            <a href="form-brand.html" class="list-group-item">FORM Branding Guide</a>
+            <a href="scorp-success.html" class="list-group-item">Scorpion Success</a>
+            <a href="herbert-bayer.html" class="list-group-item">Herbert Bayer Monograph</a>
+            
+            <li style="color: white;" class="list-group-item active">Academic Articles</li>
+            <a href="comparing-topics.html" class="list-group-item">Comparing Topics</a>
+            <a href="about-media-history" class="list-group-item">Media History</a>
+            
+            <li style="color: white;" class="list-group-item active">Major Academic Studies</li>
+            <a href="imagery/everything_portfolio/roles/socialScientist/_Neo-Corporatism and the 2008 Financial Crisis.pdf" class="list-group-item">Neo-Corporatism</a>
+            <a href="imagery/everything_portfolio/roles/socialScientist/Social Upheaval in China" class="list-group-item">Social Upheaval in China</a>
+            <a href="imagery/everything_portfolio/roles/socialScientist/Germany in 2013 - A Special Case for an Unpredictable Future" class="list-group-item">Germany in 2013 - A Special Case for an Unpredictable Future</a>
+            
+            <a href="imagery/everything_portfolio/roles/socialScientist/Freedom,ControlofCorruption,andPoliticalStability" class="list-group-item">Freedom, Control of Corruption, and Political Stability</a>
+            
+            <!--
+            <li style="color: white;" class="list-group-item active">Other links</link>
+            <a href="herbert-bayer.html" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            -->
+            
+            <a href="contact.html" class="list-group-item list-group-item-info">Let's talk!</a>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>GPLv3 . Nathaniel Buechler . 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+<!--Off canvas JS-->
+<script type="text/javascript">
+$(document).ready(function () {
+  $('[data-toggle=offcanvas]').click(function () {
+    $('.row-offcanvas').toggleClass('active')
+  });
+});
+</script>
+
+
+<!--Windows Phone JS Hack-->
+<script type="text/javascript">
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle)
+}
+</script>
+
+<!--CREDIT: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").mCustomScrollbar({
+				horizontalScroll:true,
+				theme:"dark-thin"
+				});
+        });
+    })(jQuery);
+</script>
+
+
+<!--D3 Role Timeline-->
+<script>
+
+var earlyYear = 1996;
+var currentYear = new Date().getFullYear();
+
+var roleData = [
+		{"name" : "Artist", "startDate": 1996,
+		"endDate" : currentYear, "color": "#56222E", "fileName" : "src='imagery/web-rdy_icons/artist.jpg'"},
+		{"name" : "Musician", "startDate": "2000",
+		"endDate" : currentYear, "color": "#3B2F23", "fileName" : "src='imagery/web-rdy_icons/musician.jpg'"},
+		{"name" : "Painter", "startDate": "2005",
+		"endDate" : currentYear, "color": "#6C3433", "fileName" : "src='imagery/web-rdy_icons/painter.jpg'"},
+		{"name" : "Photographer", "startDate": "2008",
+		"endDate" : currentYear, "color": "#824648", "fileName" : "src='imagery/web-rdy_icons/photographer.jpg'"},
+		{"name" : "Graphic Designer", "startDate": "2009",
+		"endDate" : currentYear, "color": "#4D0036", "fileName" : "src='imagery/web-rdy_icons/graphic-designer.jpg'"},
+		{"name" : "Journalist", "startDate": "2009",
+		"endDate" : currentYear, "color": "#412F6B", "fileName" : "src='imagery/web-rdy_icons/journalist.jpg'"},
+		{"name" : "Social Activist", "startDate": "2009",
+		"endDate" : currentYear, "color": "#44336A", "fileName" : "src='imagery/web-rdy_icons/social-activist.jpg'"},
+		{"name" : "Social Scientist", "startDate": "2010",
+		"endDate" : currentYear, "color": "#262561", "fileName" : "src='imagery/web-rdy_icons/social-scientist.jpg'"},
+		{"name" : "Political Economist", "startDate": "2010",
+		"endDate" : currentYear, "color": "#0C0B11", "fileName" : "src='imagery/web-rdy_icons/political-economist.jpg'"},
+		{"name" : "Comparative Institutionalist", "startDate": "2010",
+		"endDate" : currentYear, "color": "#3C5F7D", "fileName" : "src='imagery/web-rdy_icons/comparative-institutionalist.jpg'"},
+		{"name" : "World Historian", "startDate": "2010",
+		"endDate" : currentYear, "color": "#181737", "fileName" : "src='imagery/web-rdy_icons/world-historian.jpg'"},
+		{"name" : "Computer Programmer", "startDate": "2010",
+		"endDate" : currentYear, "color": "#632F5F", "fileName" : "src='imagery/web-rdy_icons/computer-programmer.jpg'"},
+		{"name" : "Cultural Anthropologist", "startDate": "2010",
+		"endDate" : currentYear, "color": "#171449", "fileName" : "src='imagery/web-rdy_icons/cultural-anthropologist.jpg'"},
+		{"name" : "Sound Designer", "startDate": "2011",
+		"endDate" : currentYear, "color": "#7F406B", "fileName" : "src='imagery/web-rdy_icons/sound-designer.jpg'"},
+		{"name" : "Natural Scientist", "startDate": "2012",
+		"endDate" : currentYear, "color": "#296A52", "fileName" : "src='imagery/web-rdy_icons/natural-scientist.jpg'"},
+		{"name" : "Engineer", "startDate": "2012",
+		"endDate" : currentYear, "color": "#775923", "fileName" : "src='imagery/web-rdy_icons/engineer.jpg'"},
+		{"name" : "Back-end Developer", "startDate": "2013",
+		"endDate" : currentYear, "color": "#767281", "fileName" : "src='imagery/web-rdy_icons/back-end-developer.jpg'"},
+		{"name" : "Front-end Developer", "startDate": "2013",
+		"endDate" : currentYear, "color": "#31252F", "fileName" : "src='imagery/web-rdy_icons/front-end-developer.jpg'"}
+]
+
+
+var margin = {top: 60, right: 50, bottom: 30, left: 60},
+    width = 840 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .range([0, width])
+	.domain([d3.min(roleData, function(d) { return d.startDate; }), d3.max(roleData, function(d) { return d.endDate; })]);
+
+var y = d3.scale.linear()
+    .range([height, 0])
+	.domain([0, height]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+	.ticks(currentYear - earlyYear)
+	.tickFormat(function(d) { return (d); });;
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+	.ticks(0)
+	.tickFormat(function(d,i) { return ("Role " + parseInt(i + 1)); });
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset(function(d, i) { return [30, x(parseInt(d.endDate))/1.5 - d3.select(".mCSB_container").width] ; })
+  .html(function(d) {
+	  if(d.startDate != currentYear - 1){
+	  return "<span><img " + d.fileName + "/></span><br><h2 style='text-align:center'>" + parseInt(currentYear - d.startDate) + " years</h2>" ;
+	  }
+	  else{
+	  return "<span><img " + d.fileName + "/></span><br><h2 style='text-align:center'>" + parseInt(currentYear - d.startDate) + " year</h2>" ;
+	  }
+  });
+  
+var tipSun = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset(function(d, i) { return [0, -40] ; })
+  .html(function(d) {
+	  return "<span>" + d.name + "  </h2>" ;
+  });
+
+var svg = d3.select("#roleChart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+  svg.call(tip);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px")  
+        .text("Roles Developed");
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("y", 57)
+	  .attr("x", 10)
+      .attr("dx", ".00em")
+      .style("text-anchor", "")
+      .html("(Hover/click over bar to see role info)");
+
+  svg.selectAll(".bar")
+      .data(roleData)
+    .enter().append("rect")
+      .attr("class", "bar")
+	  .attr("id" , function(d, i) { return y(i); })
+      .attr("x", function(d, i) { return x(d.startDate); })
+      .attr("width", function(d, i) { return x(d.endDate) - x(d.startDate); })
+      .attr("y", function(d, i) { return (height / roleData.length) * i; })
+      .attr("height", function(d, i) { return (height / roleData.length) - 10; })
+	  .attr("fill", function(d) {
+		  return d.color;
+		  })
+	  .on("mouseenter", function(d) {
+		  d3.select(this).attr("fill", "darkGray");
+		  })
+	  .on("mouseover", tip.show)
+	  .on("click", tip.show)
+	  .on("mouseleave", function(d) {
+		  d3.select(this).attr("fill", d.color)
+		  })
+	  ;
+
+</script>
+
+<!--SunBurst Diagram-->
+<script>
+
+
+var root = {
+	"name": "Nathaniel Buechler",
+	"color": "silver",
+		"children": [
+			{
+			"name": "Artist",
+			"color": "#56222E",
+			"children": [
+				{
+				"name": "Artist",
+				"color": "#56222E",
+				"children": [
+					{"name": "Charcoal", "size": 1},
+					{"name": "Oil Pastel", "size": 1},
+					{"name": "Graphite", "size": 1},
+					{"name": "Pencil", "size": 1},
+					]
+				},
+				{
+				"name": "Graphic Designer",
+				"color": "#4D0036",
+				"children": [
+					{
+					"name": "Designing", 
+					"children": [
+						{"name": "Books", "size": 1},
+						{"name": "Newsletter", "size": 1},
+						{"name": "Poster", "size": 1},
+						{"name": "Banner", "size": 1},
+						{"name": "Flier", "size": 1},
+						{"name": "Logo", "size": 1},
+						{"name": "Motion Graphics", "size": 1},
+						{"name": "Web Graphics", "size": 1}
+						]
+					},
+					{
+					"name": "Graphic Design Software", 
+					"children": [
+						{"name": "GIMP","size": 1},
+						{"name": "Illustrator","size": 1},
+						{"name": "InDesign", "size": 1},
+						{"name": "Photoshop", "size": 1},
+						{"name": "Flash", "size": 1},
+						{"name": "AfterEffects", "size": 1},
+						{"name": "Dreamweaver", "size": 1},
+						{"name": "Bridge", "size": 1},
+						{"name": "Acrobat", "size": 1}
+						]
+					},
+					]
+				},
+				{
+				"name": "Sound Designer",
+				"color": "#7F406B",
+				"children": [
+					{"name": "Audtion","size": 1},
+					{"name": "Logic Pro", "size": 1}
+					]
+				},
+				{
+				"name": "Photographer",
+				"color": "#824648",
+				"children": [
+					{"name": "Photography",
+					"children": [
+						{"name": "Fireworks", "size": 1},
+						{"name": "Landscape", "size": 1},
+						{"name": "Manufactured", "size": 1},
+						{"name": "Nature", "size": 1},
+						{"name": "Single Subject", "size": 1},
+						{"name": "Panorama", "size": 1}
+						] 
+					},
+					]
+				},
+				{
+				"name": "Painter",
+				"color": "#6C3433",
+				"children": [
+					{"name": "Watercolor", "size": 1},
+					{"name": "Acrylic", "size": 1},
+					{"name": "Oil", "size": 1}
+					]
+				},
+				{
+				"name": "Musician",
+				"color": "#3B2F23",
+				"children": [
+					{"name": "Trumpet", "size": 1},
+					{"name": "Cello", "size": 1}
+					]
+				}
+			]
+			},
+			{
+			"name": "Computer Programmer",
+			"color": "#632F5F",
+			"children": [
+				{
+				"name": "Basic Programming",
+				"years": 4,
+				"color": "#632F5F",
+				"children": [
+					{"name": "HTML/XHTML/HTML5", "years": 4, "size": 1},
+					{"name": "CSS/CSS2/CSS3", "years": 4, "size": 1},
+					{"name": "JavaScript", "years": 3, "size": 1},
+					]
+				},
+				{
+				"name": "Front-End Developer",
+				"color": "#31252F",
+				"children": [
+					{
+					"name": "Data Visualization Languages",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "d3.js", "years": 1, "size": 1},
+						{"name": "dc.js", "years": 1, "size": 1},
+						{"name": "crossfilter.js", "years": 1, "size": 1},
+						{"name": "nv.D3", "years": 1, "size": 1},
+						{"name": "Google Charts", "years": 1, "size": 1}
+					]},
+					{
+					"name": "Front-End MVC",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "angular.js", "years": 1, "size": 1},
+						{"name": "meteor.js", "years": 1, "size": 1},
+						{"name": "node.js", "years": 1, "size": 1}
+					]},
+					{
+					"name": "jQuery",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "jQuery UI", "years": 1, "size": 1},
+						{"name": "jQuery Mobile", "years": 1, "size": 1}
+					]
+					},
+					{
+					"name": "Content Management Systems(CMS)",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "WordPress", "years": 1, "size": 1},
+						{"name": "Joomla", "years": 1, "size": 1},
+						{"name": "phpBB", "years": 1, "size": 1}
+					]
+					},
+					{
+					"name": "Data Formats",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "CSV", "years": 1, "size": 1},
+						{"name": "TSV", "years": 1, "size": 1},
+						{"name": "JSON", "years": 1, "size": 1},
+						{"name": "BSON", "years": 1, "size": 1},
+						{"name": "XML", "years": 1, "size": 1}
+					]
+					},
+					{"name": "Bootstrap", "years": 1, "size": 1},
+					{"name": "AJAX", "years": 1, "size": 1}				
+				]
+				},
+				{
+				"name": "Back-End Developer",
+				"color": "#767281",
+				"children": [
+					{"name": "PHP", "years": 1, "size": 1},
+					{"name": "Python", "years": 1, "size": 1},
+					{
+					"name": "Groovy and Grails(GGTS)", 
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "Groovy", "years": 1, "size": 1},
+						{"name": "Grails", "years": 1, "size": 1},
+						{"name": "GSP", "years": 1, "size": 1},
+						{"name": "Gradle", "years": 1, "size": 1},
+						{"name": "Spock", "years": 1, "size": 1}
+					]
+					},
+					{
+					"name": "Eclipse, J2EE",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "Java", "years": 1, "size": 1},
+						{"name": "JSP", "years": 1, "size": 1},
+						{"name": "JUnit", "years": 1, "size": 1},
+						{"name": "Maven", "years": 1, "size": 1},
+						{"name": "Ant", "years": 1, "size": 1}
+					]
+					},
+					{
+					"name": "Spring(STS)",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "Spring Framework", "years": 1, "size": 1},
+						{"name": "Spring MVC", "years": 1, "size": 1},
+						{"name": "Spring Security", "years": 1, "size": 1},
+						{"name": "SpringSource TC Server", "years": 1, "size": 1},
+						{"name": "Thymeleaf", "years": 1, "size": 1}
+					]
+					},
+					{
+					"name": "Database Languages",
+					"years": 1,
+					"size": 1,
+					"children": [
+						{"name": "MySQL", "years": 1, "size": 1},
+						{"name": "Oracle", "years": 1, "size": 1},
+						{"name": "HQL", "years": 1, "size": 1},
+						{"name": "SQL", "years": 1, "size": 1},
+						{"name": "Hibernate", "years": 1, "size": 1},
+						{"name": "Mongo DB", "years": 1, "size": 1}
+					]
+					}
+				]
+				}
+			]
+			},
+			{
+			"name": "Engineer",
+			"color": "#775923",
+			"children": [
+				{"name": "Critical Thinking", "size": 1},
+				{"name": "Decision Making", "size": 1},
+				{"name": "Creativity", "size": 1},
+				{"name": "Time Management", "size": 1},
+				{"name": "Active Listenting", "size": 1}
+			]
+			},
+			{
+			"name": "Natural Scientist",
+			"color": "#296A52",
+			"children": [
+				{"name": "Observing", "size": 1},
+				{"name": "Documenting", "size": 1},
+				{"name": "Sharing", "size": 1},
+				{"name": "Critical Thinking", "size": 1},
+				{"name": "Botany", "size": 1},
+				{"name": "Scientific Method", "size": 1}
+			]
+			},
+			{
+			"name": "Social Scientist",
+			"color": "#262561",
+			"children": [
+				{
+				"name": "Journalist",
+				"color": "#412F6B",
+				"children": [
+					{"name": "Blogging", "size": 1},
+					{"name": "Vlogging", "size": 1},
+					{"name": "Interviewing", "size": 1},
+					{"name": "Writing", "size": 1},
+					{"name": "Documenting", "size": 1},
+					{"name": "Researching", "size": 1},
+					{"name": "Organization", "size": 1},
+					{"name": "Planning", "size": 1}
+					]
+				},
+				{
+				"name": "World Historian",
+				"color": "#181737",
+				"children": [
+					{"name": "Analyzing", "size": 1},
+					{"name": "Researching", "size": 1},
+					{"name": "Writing", "size": 1}
+					]
+				},
+				{
+				"name": "Political Economist",
+				"color": "#0C0B11",
+				"children": [
+					{"name": "Researching", 
+					"children": [
+						{"name": "Analyzing", "size": 1},
+						{"name": "Researching", "size": 1},
+						{"name": "Writing", "size": 1}
+						]
+					},
+					{"name": "Grant Writing", "size": 1},
+					{"name": "Advocating", "size": 1}
+					]
+				},
+				{
+				"name": "Cultural Anthropologist",
+				"color": "#171449",
+				"children": [
+					{"name": "Analyzing", "size": 1},
+					{"name": "Researching", "size": 1},
+					{"name": "Writing", "size": 1}
+					]
+				},
+				{
+				"name": "Comparative Institutionalist",
+				"color": "#3C5F7D",
+				"children": [
+					{"name": "Analyzing", "size": 1},
+					{"name": "Researching", "size": 1},
+					{"name": "Writing", "size": 1}
+					]
+				},
+				{
+				"name": "Social Activist",
+				"color": "#44336A",
+				"children": [
+					{
+					"name": "Campaigning",
+					"children": [
+						{"name": "Diplomacy", "size": 1},
+						{"name": "Networking", "size": 1},
+						{"name": "Negotiating", "size": 1},
+						{"name": "Haggling", "size": 1},
+						{"name": "Negotiating", "size": 1},
+						{"name": "Debating", "size": 1}
+					]
+					},
+					{
+					"name": "Volunteering",
+						"children": [
+						{
+						"name": "Advocating",
+						"children": [
+							{"name": "Supporting", "size": 1},
+							{"name": "Mediating", "size": 1},
+							{"name": "Preserving", "size": 1},
+							{"name": "Negotiating", "size": 1}
+						]
+						},
+						{"name": "Persevering", "size": 1},
+						{"name": "Persuasion", "size": 1}
+					]
+					}
+				]
+				}
+			]
+			}
+			
+	]
+}
+
+
+
+var sunWidth = 840,
+    sunHeight = 370,
+    radius = Math.min(sunWidth, sunHeight) / 2;
+
+var x = d3.scale.linear()
+    .range([0, 2 * Math.PI]);
+
+var y = d3.scale.sqrt()
+    .range([0, radius]);
+
+var color = d3.scale.category20c();
+
+var svg = d3.select("#navSunBurst").append("svg")
+    .attr("width", sunWidth)
+    .attr("height", sunHeight + 10)
+  .append("g")
+    .attr("transform", "translate(" + sunWidth / 2 + "," + (sunHeight / 2 + 10) + ")");
+
+var partition = d3.layout.partition()
+    .value(function(d) { return d.size; });
+
+var arc = d3.svg.arc()
+    .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
+    .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
+    .innerRadius(function(d) { return Math.max(0, y(d.y)); })
+    .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
+
+  svg.call(tipSun);
+  
+  var path = svg.selectAll("path")
+      .data(partition.nodes(root))
+    .enter().append("path")
+      .attr("d", arc)
+	  .attr("stroke", "black")
+	  .style("opacity", function(d) {
+		  if(d.depth > 1){
+		  	return 1/(d.depth-1);
+		  } 
+		  else {
+		  	return 1;
+		  }
+	  })
+	  .style("fill", function(d) { 
+	  if(d.color != null){
+		  return d.color;
+		  } else if(d.parent != null) {
+			  return d.parent.color ? d.parent.color: d.parent.parent.color;
+			  } else {
+			  return color((d.children ? d : d.parent).name);
+			  }
+	  })
+      .on("click", click)
+	  .on("mouseenter", function(d) {
+		  d3.select(this).style("fill", "darkGray");
+		  })
+	  .on("mouseover", tipSun.show)
+	  .on("mouseleave", function(d) {
+		  d3.select(this)
+		  .style("fill", function(d) { 
+		  if(d.color != null){
+			  return d.color;
+			  } else if(d.parent != null) {
+				  return d.parent.color ? d.parent.color: d.parent.parent.color;
+				  } else {
+				  return color((d.children ? d : d.parent).name);
+				  }
+		  	  })
+		  })
+	  ;
+
+  function click(d) {
+    path.transition()
+      .duration(750)
+      .attrTween("d", arcTween(d));
+	  d3.selectAll(".centerText")
+	  .transition().duration(400)
+	  .style("opacity", 0)
+	  .style("font-size", "0px");
+	  if(d.name == "Nathaniel Buechler"){
+	  	d3.selectAll(".centerText")
+		.style("display", "")
+		.transition().duration(400)
+		.style("opacity", 1)
+		.style("font-size", "13px");
+	  }
+  }
+
+
+d3.select(self.frameElement).style("height", sunHeight + "px");
+
+// Interpolate the scales!
+function arcTween(d) {
+  var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+      yd = d3.interpolate(y.domain(), [d.y, 1]),
+      yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+  return function(d, i) {
+    return i
+        ? function(t) { return arc(d); }
+        : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
+  };
+}
+
+svg.append("text")
+		.attr("class", "centerText")
+        .attr("x", (width / width))             
+        .attr("y", -10 - (margin.top / margin.top))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "13px")  
+        .text("Roles and Skills");
+
+svg.append("text")
+		.attr("class", "centerText")
+        .attr("x", (width / width))             
+        .attr("y", 10 - (margin.top / margin.top))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "13px")  
+        .text("Distributed by");
+
+svg.append("text")
+		.attr("class", "centerText")
+        .attr("x", (width / width))             
+        .attr("y", 30 - (margin.top / margin.top))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "13px")  
+        .text("Subject Area");
+
+svg.append("text")
+		.attr("class", "centerText")
+        .attr("x", -(width / 3))             
+        .attr("y", 10 - (margin.top / margin.top))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "13px")  
+        .text("I've explored a few subjects.");
+
+svg.append("text")
+		.attr("class", "centerText")
+        .attr("x", -(width / 3))             
+        .attr("y", 30 - (margin.top / margin.top))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "13px")  
+        .text("(Click an area to zoom)");
+
+</script>
+
+  </body>
+</html>

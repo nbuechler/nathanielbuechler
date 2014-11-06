@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nathaniel Buechler</title>
+
+<!-- jQuery-->
+<script src="js/jquery-1.11.0.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<!-- http://bootswatch.com/ for different themes -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap.min.css"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" type="text/css" href="css_v2/bootstrap-theme.min.css"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- Google Font -->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+
+<!--JQUERY UI 1.10.4-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="css_v2/jquery-ui-1.10.4.custom.min.css">
+
+<!--SCROLLBAR: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<link href="css_v2/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+
+<!--D3JS Version 3-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<!--d3-tip: http://labratrevenge.com/d3-tip/-->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<style>
+
+/* Windows Phone IE Hack*/
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+/*Bootstrap Starter */
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+</style>
+
+<style>
+
+.axis {
+  font: 10px 'Lato', sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}  
+  
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  border: white 2px solid;
+}
+
+/* Creates a small triangle extender for the tooltip */
+/*
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+*/
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+</style>
+
+<style>
+
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+</style>
+
+<style>
+
+#backgroundHolder{
+	width: 100%;
+	background:url(imagery/bkgd/bkgd_v2_index.gif);
+	background-repeat: no-repeat;
+	background-color: black;
+	}
+
+.container {
+	font-family: 'Lato', sans-serif;
+	}
+
+h1{
+	font-family: 'Lato', sans-serif;
+	}
+
+h2{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+p{
+	font-family: 'Lato', sans-serif;
+	color: white;
+	}
+
+.btnMargin{
+	margin-top: 20px;
+	}
+	
+#roleBar{
+	text-align: center;
+	}
+
+.panelPadding {
+	padding-bottom: 3%;
+	}
+
+.roleIcon{
+	width: 73px;
+	margin: 1%;
+	}
+	
+.roleDetailed{
+	}
+
+.roleIcon:hover, .roleIconDetailed:hover{
+	opacity: .3;
+	}
+	
+.canvasHolderBkgd{
+	background-color: #D3D3D3
+	}	
+	
+/* Scrollbar styled and fun */
+.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto; }
+.scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+.scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+.scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
+
+	
+</style>
+
+
+
+<body id="backgroundHolder">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.nathanielbuechler.com">Multifaceted Specialist</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <!--
+            <li><a href="data-engineering.html">Data Engineering</a></li>
+            <li><a href="system-thinking.html">Systems Thinking</a></li>
+            -->
+            <li><a href="rolePerspective.html">Roles</a></li>
+            <li><a href="skillPerspective.html">Skills</a></li>
+			<li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+		<div class="row">
+            <div class="panel">
+            	<div class="panel-body">
+                	<div class="col-lg-12">
+                    	<div class="row">
+                        
+                        <p>The ideal work environment is one where I am able to experiment and develop new skills by understanding new technologies. Specifically, I am looking to hone my expertise with MEAN stack technologies via my front-end engineering expertise. My commute should be no more than 45 minutes ideally. And, I also have high expectations for the kind of product that I work on improving or creating. I would like to develop or assist in developing highly interactive systems that visually convey large quantities of information, hence I want to be visually conveying big data since I am great with JavaScript and D3js. This information system should be focused on improving the lives of others, and really ought to remove barriers for people. As for the team I work on, I would like to be a part of agile teams that practice SCRUM based methodologies. While I understand my hope for the ideal position is very specific, I am certain that there are many positions available that encompass most of what I am seeking.</p>
+                        </div>
+                        <div class="row"><h3>E-mail: <a href="mailto:natebuechler@gmail.com?Subject=Hello%20Nathaniel"> natebuechler (at) gmail (dot) com </a></h3></div>
+                        <div class="row"><h3>Phone: 443-542-7473</h3></div>
+                        
+                        <h2><a href="Nathaniel_Buechler-UI.UX-Engineer.pdf" class="list-group-item list-group-item-success" style="padding:30px; margin-top: 20px; text-align:center;">Download my R&#233sum&#233</a></h2>
+                        
+                        
+                    </div>
+                </div>
+                <div class="panel-footer">
+            		Here's how we can get in touch!
+                </div>
+            </div>
+        </div>
+
+      <hr>
+
+      <footer>
+        <p>GPLv3 . Nathaniel Buechler . 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+<!--Windows Phone JS Hack-->
+<script type="text/javascript">
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle)
+}
+</script>
+
+<!--CREDIT: http://manos.malihu.gr/jquery-custom-content-scroller/-->
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").mCustomScrollbar({
+				horizontalScroll:true,
+				theme:"dark-thin"
+				});
+        });
+    })(jQuery);
+</script>
+
+
+
+
+
+
+  </body>
+</html>
