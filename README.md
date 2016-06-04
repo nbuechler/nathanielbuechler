@@ -1,7 +1,9 @@
-Nathaniel Buechler's Online Portfolio
+Nathaniel Buechler's Online Portfolio --- DEPRICATED
 =================
 
-My webpage live on http://www.nathanielbuechler.com
+My new webpage live on http://www.nathanielbuechler.com
+
+This project is more of an artifact of version 7 of my website. :-D
 
 ##License
 
