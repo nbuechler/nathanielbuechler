@@ -2,7 +2,7 @@
 My new webpage live on http://www.nathanielbuechler.com. This project is the 7th iteration of my webpage. Displaying my 'hat' - or role - as a Multifacited Specialist, this project displays the qualities of a technician that masters many skills while being sometimes satisfactory at many more.
 
 # History
-The original project was made many years ago with Photoshop slices. If you're unfamiliar with that concept, it is when the web designer takes a photoshop file and slices it into HTML tables. While much different from the 1st iteration, the 7th iteration doesn't use a web framework. This depicated project is more of an artifact ofmy website.
+The original project was made many years ago with Photoshop slices. If you're unfamiliar with that concept, it is when the web designer takes a photoshop file and slices it into HTML tables. While much different from the 1st iteration, the 7th iteration doesn't use a web framework. This depricated project is more of an artifact ofmy website.
 
 # Goals
 * The main goal is to display all of my accomplishments.
